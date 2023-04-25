@@ -108,22 +108,63 @@ const Car = function (make, speed) {
 };
 
 Car.prototype.accelerate = function () {
-  const accSpeed = this.speed + 10;
-  console.log(accSpeed);
+  this.speed += 10;
+  console.log(`${this.make} is going at ${this.speed} km/h.`);
 };
 
 Car.prototype.brake = function () {
-  const decSpeed = this.speed - 5;
-  console.log(decSpeed);
+  this.speed -= 5;
+  console.log(`${this.make} is going at ${this.speed} km/h.`);
 };
 
-const katCar = new Car('BMW', 120);
-const adamCar = new Car('Mercedes', 95);
+const bmw = new Car('BMW', 120);
+const mercedes = new Car('Mercedes', 95);
 
-katCar.accelerate();
-katCar.brake();
-console.log(katCar);
+bmw.accelerate();
+bmw.brake();
 
-adamCar.accelerate();
-adamCar.brake();
-console.log(adamCar);
+mercedes.accelerate();
+mercedes.brake();
+
+console.log(bmw);
+console.log(mercedes);
+
+///////////////////////////////////////
+// ES6 Classes
+
+//class expression
+// const Personcl = class {};
+
+//class declaration
+class PersonCl {
+  //a method of this class -- it needs to be called constructor
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // Methods will be added to .prototype property
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+}
+
+const jessica = new PersonCl('Jessica', 1996);
+console.log(jessica);
+jessica.calcAge();
+
+console.log(jessica.__proto__ === PersonCl.prototype);
+
+// PersonCl.prototype.greet = function () {
+//   console.log(`Hey ${this.firstName}`);
+// };
+
+jessica.greet();
+
+// 1. Classes are NOT hoisted
+// 2. Class are first-class citizens
+// 3. Classes are executed in strict mode
