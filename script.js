@@ -1,7 +1,6 @@
 'use strict';
 
 //Constructor functions
-
 //only function declarations and function expressions work (this keyword)
 
 const Person = function (firstName, birthYear) {
@@ -34,6 +33,16 @@ console.log(matilda, jack);
 console.log(jonas instanceof Person);
 // console.log(jay instanceof Person);
 
+Person.hey = function () {
+  console.log('Hey there 👋');
+  console.log(this);
+};
+
+Person.hey();
+
+//below code doesn't work because not inherit it
+// jonas.hey();
+///////////////////////////////////////
 // Prototypes
 console.log(Person.prototype);
 
@@ -143,7 +152,7 @@ class PersonCl {
     this.fullName = fullName;
     this.birthYear = birthYear;
   }
-
+  // Instance methods
   // Methods will be added to .prototype property
   calcAge() {
     console.log(2037 - this.birthYear);
@@ -165,6 +174,12 @@ class PersonCl {
 
   get fullName() {
     return this._fullName;
+  }
+
+  static hey() {
+    //static method
+    console.log('Hey there 👋');
+    console.log(this);
   }
 }
 
@@ -189,6 +204,8 @@ jessica.greet();
 // Getters and Setters
 
 const walter = new PersonCl('Walter White', 1965);
+
+PersonCl.hey();
 
 //simple obj literal
 const account = {
