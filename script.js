@@ -334,14 +334,14 @@ Student.prototype = Object.create(Person.prototype);
 // you will not end up with a prototype chain that you need.
 // Student.prototype = Person.prototype;
 
-Student.prototype.introduce = function () {
+Student.prototype. = function () {
   console.log(`My name is ${this.firstName} and I study ${this.course}.`);
 };
 
 const mike = new Student('Mike', 2020, 'Computer Science');
 console.log(mike);
 
-mike.introduce();
+mike.();
 mike.calcAge();
 
 console.log(mike.__proto__);
@@ -464,7 +464,7 @@ class StudentCl extends PersonCl {
     this.course = course;
   }
 
-  introduce() {
+  () {
     console.log(`My name is ${this.fullName} and I study ${this.course}.`);
   }
 
@@ -481,14 +481,14 @@ class StudentCl extends PersonCl {
 
 // const martha = new StudentCl('Martha Jones', 2012);
 const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
-martha.introduce();
+martha.();
 martha.calcAge();
 
 */
 
 ///////////////////////////////////////
 // Inheritance Between "Classes" : Object.create
-
+/*  
 const PersonProto = {
   calcAge() {
     console.log(2037 - this.birthYear);
@@ -509,11 +509,56 @@ StudentProto.init = function (firstName, birthYear, course) {
   this.course = course;
 };
 
-StudentProto.introduce = function () {
+StudentProto. = function () {
   console.log(`My name is ${this.firstName} and I study ${this.course}.`);
 };
 
 const jay = Object.create(StudentProto);
 jay.init('Jay', 2010, 'Computer Science');
-jay.introduce();
+jay.();
 jay.calcAge();
+
+*/
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account, ${owner}.`);
+  }
+  // public interface
+  deposit(val) {
+    this.movements.push(val);
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+  }
+
+  approveLoan() {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this.approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+    }
+  }
+}
+
+const acc1 = new Account('Kat', 'USD', 1111);
+
+// acc1.movements.push(250);
+// acc1.movements.push(-140);
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+acc1.approveLoan(1000);
+
+console.log(acc1);
+console.log(acc1.pin);
